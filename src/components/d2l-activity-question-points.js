@@ -6,8 +6,8 @@ import '@brightspace-ui/core/components/inputs/input-number.js';
 import '@brightspace-ui/core/components/colors/colors.js';
 
 import { css, html, LitElement } from 'lit-element/lit-element.js';
+import { heading4Styles, labelStyles } from '@brightspace-ui/core/components/typography/styles.js';
 import { BaseMixin } from '../mixins/base-mixin';
-import { heading4Styles } from '@brightspace-ui/core/components/typography/styles.js';
 
 class ActivityQuestionPoints extends BaseMixin(LitElement) {
 	static get properties() {
@@ -42,8 +42,6 @@ class ActivityQuestionPoints extends BaseMixin(LitElement) {
 				align-items: baseline;
 			}
 			.points_input__label {
-				font-weight: bold;
-				font-size: 0.7rem;
 				margin: 12px;
 			}
 			.button_group {
@@ -52,10 +50,15 @@ class ActivityQuestionPoints extends BaseMixin(LitElement) {
 			.button_group__button {
 				margin-right: 12px;
 			}
+			:host([dir="rtl"]) .button_group__button {
+				margin-left: 12px;
+				margin-right: 0px;
+			}
 		`;
 		return [
 			activityQuestionPointsStyles,
-			heading4Styles
+			heading4Styles,
+			labelStyles
 		];
 	}
 
@@ -126,16 +129,16 @@ class ActivityQuestionPoints extends BaseMixin(LitElement) {
 				</div>
 			</d2l-list-item-content>
 			<div class="activity_list__points_input" slot="actions">
-				<label for="points_input_${question.id}" class="points_input__label">
+				<label for="points_input_${question.id}" class="points_input__label d2l-label-text">
 					${this.localize('inputLabelPoints')}
 				</label>
 				<d2l-input-number
 					id="points_input_${question.id}"
-					class="points_input_field"
 					label=${this.localize('inputLabelPoints')}
 					value=${ question.points }
 					@change=${this._validation}
-					min = 1
+					min = 0
+					min-exclusive
 					required
 					label-hidden>
 				</d2l-input-number>
