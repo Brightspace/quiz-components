@@ -7,6 +7,7 @@ import '@brightspace-ui/core/components/colors/colors.js';
 
 import { css, html, LitElement } from 'lit-element/lit-element.js';
 import { BaseMixin } from '../mixins/base-mixin';
+import { heading4Styles } from '@brightspace-ui/core/components/typography/styles.js';
 
 class ActivityQuestionPoints extends BaseMixin(LitElement) {
 	static get properties() {
@@ -20,20 +21,20 @@ class ActivityQuestionPoints extends BaseMixin(LitElement) {
 	static get styles() {
 		const activityQuestionPointsStyles = css`
 			.main_body {
-				border: 1px solid var(--d2l-color-mica);
-				border-radius: 6px;
+				border: 1px solid var(--d2l-color-gypsum);
+				border-radius: 8px;
 			}
 			.main_body__title {
-				background-color: var(--d2l-color-celestine-plus-2);
-				border-bottom: 1px solid var(--d2l-color-mica);
-				padding: 18px;
-				font-weight: bold;
+				background-color: var(--d2l-color-regolith);
+				border-bottom: 1px solid var(--d2l-color-gypsum);
+				display: flex;
+				padding: 0px 30px;
 			}
 			.main_body__description {
-				padding: 18px;
+				padding: 30px;
 			}
 			.main_body__activity_list {
-				padding: 18px;
+				padding: 30px;
 				padding-top: 0;
 			}
 			.activity_list__points_input {
@@ -46,14 +47,15 @@ class ActivityQuestionPoints extends BaseMixin(LitElement) {
 				margin: 12px;
 			}
 			.button_group {
-				margin: 18px;
+				margin: 30px;
 			}
 			.button_group__button {
 				margin-right: 12px;
 			}
 		`;
 		return [
-			activityQuestionPointsStyles
+			activityQuestionPointsStyles,
+			heading4Styles
 		];
 	}
 
@@ -71,6 +73,12 @@ class ActivityQuestionPoints extends BaseMixin(LitElement) {
 				title: 'Oh no!',
 				secondary: 'nope',
 				points: 42
+			},
+			{
+				id: 3,
+				title: 'Third',
+				secondary: 'no3pe',
+				points: 3
 			}
 		];
 		this.updateDisabled = false;
@@ -140,7 +148,9 @@ class ActivityQuestionPoints extends BaseMixin(LitElement) {
 		return html`
 			<div class="main_body">
 				<div class="main_body__title">
-					${this.localize('mainBodyTitle')}
+					<div class="d2l-heading-4">
+						${this.localize('mainBodyTitle')}
+					</div>
 				</div>
 				<div class="main_body__description">
 					${this.localize('mainBodyDescription')}
