@@ -1,0 +1,173 @@
+import '@brightspace-ui/core/components/button/button.js';
+import '@brightspace-ui/core/components/list/list.js';
+import '@brightspace-ui/core/components/list/list-item.js';
+import '@brightspace-ui/core/components/list/list-item-content.js';
+import '@brightspace-ui/core/components/inputs/input-number.js';
+import '@brightspace-ui/core/components/colors/colors.js';
+
+import { css, html, LitElement } from 'lit-element/lit-element.js';
+import { BaseMixin } from '../mixins/base-mixin';
+
+class ActivityQuestionPoints extends BaseMixin(LitElement) {
+	static get properties() {
+		return {
+			updateDisabled: {
+				type: Boolean
+			}
+		};
+	}
+
+	static get styles() {
+		const activityQuestionPointsStyles = css`
+			.main_body {
+				border: 1px solid var(--d2l-color-mica);
+				border-radius: 6px;
+			}
+			.main_body__title {
+				background-color: var(--d2l-color-celestine-plus-2);
+				border-bottom: 1px solid var(--d2l-color-mica);
+				padding: 18px;
+				font-weight: bold;
+			}
+			.main_body__description {
+				padding: 18px;
+			}
+			.main_body__activity_list {
+				padding: 18px;
+				padding-top: 0;
+			}
+			.activity_list__points_input {
+				display: flex;
+				align-items: baseline;
+			}
+			.points_input__label {
+				font-weight: bold;
+				font-size: 0.7rem;
+				margin: 12px;
+			}
+			.button_group {
+				margin: 18px;
+			}
+			.button_group__button {
+				margin-right: 12px;
+			}
+		`;
+		return [
+			activityQuestionPointsStyles
+		];
+	}
+
+	constructor() {
+		super();
+		this.questions = [
+			{
+				id: 1,
+				title: 'Poulet',
+				secondary: 'pollo',
+				points: 1
+			},
+			{
+				id: 2,
+				title: 'Oh no!',
+				secondary: 'nope',
+				points: 42
+			}
+		];
+		this.updateDisabled = false;
+	}
+
+	_validation() {
+		this.updateDisabled = this.questions.reduce((result, question) => {
+			return result || !this.shadowRoot.querySelector(`#points_input_${question.id}`).value;
+		}, false);
+	}
+
+	_updatePoints() {
+		console.log('Updating points');
+		this._validation();
+
+		if (!this.updateDisabled) {
+			const results = this.questions.reduce((result, question) => {
+				const value = this.shadowRoot.querySelector(`#points_input_${question.id}`).value;
+				if (value) {
+					result.push({
+						id: question.id,
+						value
+					});
+				}
+				return result;
+			}, []);
+
+			console.log(results);
+		}
+	}
+
+	_cancelUpdate() {
+		console.log('Cancelling update');
+	}
+
+	_renderQuestion(question) {
+		return html`
+		<d2l-list-item>
+			<d2l-list-item-content>
+				<div>
+					${ question.title }
+				</div>
+				<div slot="secondary">
+					${ question.secondary }
+				</div>
+			</d2l-list-item-content>
+			<div class="activity_list__points_input" slot="actions">
+				<label for="points_input_${question.id}" class="points_input__label">
+					${this.localize('inputLabelPoints')}
+				</label>
+				<d2l-input-number
+					id="points_input_${question.id}"
+					class="points_input_field"
+					label=${this.localize('inputLabelPoints')}
+					value=${ question.points }
+					@change=${this._validation}
+					min = 1
+					required
+					label-hidden>
+				</d2l-input-number>
+			</div>
+		</d2l-list-item>
+		`;
+	}
+
+	render() {
+		return html`
+			<div class="main_body">
+				<div class="main_body__title">
+					${this.localize('mainBodyTitle')}
+				</div>
+				<div class="main_body__description">
+					${this.localize('mainBodyDescription')}
+				</div>
+				<div class="main_body__activity_list">
+					<d2l-list separators="between">
+						${ this.questions.map(question => this._renderQuestion(question)) }
+					</d2l-list>
+				</div>
+			</div>
+
+			<div class="button_group">
+				<d2l-button
+					class="button_group__button"
+					primary
+					?disabled=${this.updateDisabled}
+					@click=${this._updatePoints}>
+					${this.localize('buttonUpdate')}
+				</d2l-button>
+				<d2l-button
+					class="button_group__button"
+					@click=${this._cancelUpdate}>
+					${this.localize('buttonCancel')}
+				</d2l-button>
+			</div>
+		`;
+	}
+}
+
+customElements.define('d2l-activity-question-points', ActivityQuestionPoints);

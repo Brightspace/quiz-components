@@ -5,7 +5,8 @@
   "main": "index.js",
   "dependencies": {
     "@brightspace-ui/core": "^1.118.2",
-    "lit-element": "^2.4.0"
+    "lit-element": "^2.4.0",
+    "d2l-table": "BrightspaceUI/table#semver:^2"
   },
   "devDependencies": {
     "babel-eslint": "^10",
