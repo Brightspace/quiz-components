@@ -76,15 +76,7 @@ class ActivityQuestionPoints extends BaseMixin(LitElement) {
 	async connectedCallback() {
 		super.connectedCallback();
 
-		const getQuestions = this.quizService.getQuestions();
-
-		try {
-			const [questions] = await Promise.all([getQuestions]);
-			this.questions = questions;
-
-		} catch (err) {
-			console.error(err);
-		}
+		this.questions = await this.quizService.getQuestions();
 	}
 
 	_validation() {

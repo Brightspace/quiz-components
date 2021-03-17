@@ -42,14 +42,13 @@ describe('d2l-activity-question-points', () => {
 
 	describe('constructor', () => {
 		it('should construct', () => {
-			runConstructor('d2l-activity-question-points');
+			expect(() => runConstructor('d2l-activity-question-points')).to.not.throw();
 		});
 	});
 
 	describe('displays questions', () => {
 		beforeEach(() => {
 			getQuizServiceStub = sinon.stub(QuizServiceFactory, 'getQuizService');
-			getQuizServiceStub.returns(new QuizTestService());
 		});
 
 		afterEach(() => {
@@ -81,7 +80,6 @@ describe('d2l-activity-question-points', () => {
 	describe('user can change point values', () => {
 		beforeEach(() => {
 			getQuizServiceStub = sinon.stub(QuizServiceFactory, 'getQuizService');
-			getQuizServiceStub.returns(new QuizTestService());
 		});
 
 		afterEach(() => {
