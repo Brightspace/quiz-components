@@ -1,0 +1,9 @@
+{
+  "name": "Quiz Components",
+  "source_dir": "locales",
+  "source_match": "en\\.js$",
+  "output_file_path": "locales/%CULTURE%.js",
+  "parser_plugin": {
+    "plugin": "parse_js"
+  }
+}
