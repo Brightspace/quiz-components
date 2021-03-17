@@ -8,12 +8,16 @@ import '@brightspace-ui/core/components/colors/colors.js';
 import { css, html, LitElement } from 'lit-element/lit-element.js';
 import { heading4Styles, labelStyles } from '@brightspace-ui/core/components/typography/styles.js';
 import { BaseMixin } from '../mixins/base-mixin';
+import { QuizServiceFactory } from '../services/quizServiceFactory';
 
 class ActivityQuestionPoints extends BaseMixin(LitElement) {
 	static get properties() {
 		return {
 			updateDisabled: {
 				type: Boolean
+			},
+			questions: {
+				type: Array
 			}
 		};
 	}
@@ -64,27 +68,23 @@ class ActivityQuestionPoints extends BaseMixin(LitElement) {
 
 	constructor() {
 		super();
-		this.questions = [
-			{
-				id: 1,
-				title: 'Poulet',
-				secondary: 'pollo',
-				points: 1
-			},
-			{
-				id: 2,
-				title: 'Oh no!',
-				secondary: 'nope',
-				points: 42
-			},
-			{
-				id: 3,
-				title: 'Third',
-				secondary: 'no3pe',
-				points: 3
-			}
-		];
 		this.updateDisabled = false;
+
+		this.quizService = QuizServiceFactory.getQuizService();
+	}
+
+	async connectedCallback() {
+		super.connectedCallback();
+
+		const getQuestions = this.quizService.getQuestions();
+
+		try {
+			const [questions] = await Promise.all([getQuestions]);
+			this.questions = questions;
+
+		} catch (err) {
+			console.error(err);
+		}
 	}
 
 	_validation() {
@@ -94,7 +94,6 @@ class ActivityQuestionPoints extends BaseMixin(LitElement) {
 	}
 
 	_updatePoints() {
-		console.log('Updating points');
 		this._validation();
 
 		if (!this.updateDisabled) {
@@ -109,7 +108,7 @@ class ActivityQuestionPoints extends BaseMixin(LitElement) {
 				return result;
 			}, []);
 
-			console.log(results);
+			this.quizService.updateQuestionPoints(results);
 		}
 	}
 
@@ -137,7 +136,7 @@ class ActivityQuestionPoints extends BaseMixin(LitElement) {
 					label=${this.localize('inputLabelPoints')}
 					value=${ question.points }
 					@change=${this._validation}
-					min = 0
+					min=0
 					min-exclusive
 					required
 					label-hidden>
@@ -160,7 +159,7 @@ class ActivityQuestionPoints extends BaseMixin(LitElement) {
 				</div>
 				<div class="main_body__activity_list">
 					<d2l-list separators="between">
-						${ this.questions.map(question => this._renderQuestion(question)) }
+						${ this.questions?.map(question => this._renderQuestion(question)) }
 					</d2l-list>
 				</div>
 			</div>
