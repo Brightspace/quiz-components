@@ -49,9 +49,7 @@ class ActivityQuestionPoints extends HypermediaStateMixin(BaseMixin(LitElement))
 				display: flex;
 				align-items: baseline;
 			}
-			.points_input__label {
-				margin: 12px;
-			}
+
 			.button_group {
 				margin: 30px;
 			}

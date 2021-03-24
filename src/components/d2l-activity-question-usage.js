@@ -17,30 +17,46 @@ class ActivityQuestionUsage extends HypermediaStateMixin(BaseMixin(LitElement)) 
 	static get properties() {
 		return {
 			_activityHref: { observable: observableTypes.link, rel: rels.activityUsage },
+			_setPoints: {
+				type: Object,
+				observable: observableTypes.action,
+				name: 'set-points'
+			},
 			id: {
 				type: String,
-				observable: observableTypes.property,
-				route: [{observable: observableTypes.properties}]
+				observable: observableTypes.property
 			},
 			points: {
 				type: String,
-				observable: observableTypes.property,
-				route: [{observable: observableTypes.properties}]
-			},
-			setPoints: {
-				type: Object,
-				observable: observableTypes.action,
-				name: 'set-points',
-				route: [{observable: observableTypes.link}] }
+				observable: observableTypes.property
+			}
 		};
 	}
 
 	static get styles() {
-		return [ css`` ];
+		return [ css`
+		.points_input__label {
+			margin: 12px;
+		}
+		` ];
+	}
+
+	_onInputChange(e) {
+		debugger;
+		const points = e.currentTarget.value;
+		this._setPoints.commit(
+			{
+				points: {
+					observable: observableTypes.property,
+					value: points
+				}
+			}
+		);
 	}
 
 	render() {
 		return html`
+		${this.points}
 		<d2l-list-item>
 			<d2l-list-item-content>
 				<div>
@@ -58,7 +74,7 @@ class ActivityQuestionUsage extends HypermediaStateMixin(BaseMixin(LitElement)) 
 					id="points_input_${this.id}"
 					label=${this.localize('inputLabelPoints')}
 					value=${ this.points }
-					@change=${this._validation}
+					@change="${this._onInputChange}"
 					min=0
 					min-exclusive
 					required
