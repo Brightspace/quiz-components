@@ -16,7 +16,20 @@ const rels = Object.freeze({
 class ActivityQuestionUsage extends HypermediaStateMixin(BaseMixin(LitElement)) {
 	static get properties() {
 		return {
-			_activityHref: { observable: observableTypes.link, rel: rels.activityUsage },
+			_activityHref: {
+				observable: observableTypes.link,
+				rel: rels.activityUsage,
+				route: [{
+					observable: observableTypes.link,
+					rel: 'https://activities.api.brightspace.com/rels/activity-usage'
+				}, {
+					observable: observableTypes.link,
+					rel: 'https://activities.api.brightspace.com/rels/user-activity-usage'
+				}, {
+					observable: observableTypes.link,
+					rel: 'https://api.brightspace.com/rels/assignment'
+				}]
+			},
 			_setPoints: {
 				type: Object,
 				observable: observableTypes.action,
@@ -42,6 +55,9 @@ class ActivityQuestionUsage extends HypermediaStateMixin(BaseMixin(LitElement)) 
 	}
 
 	_onInputChange(e) {
+		if (!this._setPoints.has) {
+			return;
+		}
 		const points = e.currentTarget.value;
 		this._setPoints.commit(
 			{

@@ -1,0 +1,30 @@
+{
+  "rel": [
+    "item"
+  ],
+  "properties": {
+    "id": "1",
+    "points": 10
+  },
+  "links": [
+    {
+      "rel": [
+        "self"
+      ],
+      "href": "https://dfdb7e15-7355-4554-a9a5-dbf6b8aee6e7.activities.api.proddev.d2l/activities/6606_51000_2/usages/6609/collection/1"
+    },
+    {
+      "rel": [
+        "https://activities.api.brightspace.com/rels/activity-usage"
+      ],
+      "href": "data/activity-usage.json"
+    },
+    {
+      "rel": [
+        "up",
+        "collection"
+      ],
+      "href": "https://dfdb7e15-7355-4554-a9a5-dbf6b8aee6e7.activities.api.proddev.d2l/activities/6606_51000_2/usages/6609/collection"
+    }
+  ]
+}
