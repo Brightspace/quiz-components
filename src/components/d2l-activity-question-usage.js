@@ -42,7 +42,6 @@ class ActivityQuestionUsage extends HypermediaStateMixin(BaseMixin(LitElement)) 
 	}
 
 	_onInputChange(e) {
-		debugger;
 		const points = e.currentTarget.value;
 		this._setPoints.commit(
 			{
@@ -52,6 +51,7 @@ class ActivityQuestionUsage extends HypermediaStateMixin(BaseMixin(LitElement)) 
 				}
 			}
 		);
+		this._state.push();
 	}
 
 	render() {
