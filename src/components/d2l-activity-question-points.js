@@ -8,14 +8,13 @@ import '@brightspace-hmc/foundation-components/components/activity/name/d2l-acti
 import '@brightspace-hmc/foundation-components/components/activity/type/d2l-activity-type';
 
 import { css, LitElement } from 'lit-element/lit-element.js';
-import { html } from '@brightspace-hmc/foundation-engine/framework/lit/hypermedia-components.js';
 import { heading4Styles, labelStyles } from '@brightspace-ui/core/components/typography/styles.js';
-import { ActivityUsageCollectionEntity } from 'siren-sdk/src/activities/ActivityUsageCollectionEntity.js';
 import { BaseMixin } from '../mixins/base-mixin';
+import { html } from '@brightspace-hmc/foundation-engine/framework/lit/hypermedia-components.js';
+import { HypermediaStateMixin } from '@brightspace-hmc/foundation-engine/framework/lit/HypermediaStateMixin';
 import { QuizServiceFactory } from '../services/quizServiceFactory';
-import { EntityMixinLit } from 'siren-sdk/src/mixin/entity-mixin-lit';
 
-class ActivityQuestionPoints extends EntityMixinLit(BaseMixin(LitElement)) {
+class ActivityQuestionPoints extends HypermediaStateMixin(BaseMixin(LitElement)) {
 	static get properties() {
 		return {
 			updateDisabled: {
@@ -74,7 +73,6 @@ class ActivityQuestionPoints extends EntityMixinLit(BaseMixin(LitElement)) {
 	constructor() {
 		super();
 		this._items = [];
-		this._setEntityType(ActivityUsageCollectionEntity);
 
 		this.quizService = QuizServiceFactory.getQuizService();
 	}
