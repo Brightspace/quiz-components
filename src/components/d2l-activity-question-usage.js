@@ -10,7 +10,10 @@ import { HypermediaStateMixin, observableTypes } from '@brightspace-hmc/foundati
 import { BaseMixin } from '../mixins/base-mixin';
 
 const rels = Object.freeze({
-	activityUsage: 'https://activities.api.brightspace.com/rels/activity-usage'
+	activityUsage: 'https://activities.api.brightspace.com/rels/activity-usage',
+	external: 'https://assignments.api.brightspace.com/rels/external',
+	assignment: 'https://api.brightspace.com/rels/assignment',
+	userActivityUsage: 'https://activities.api.brightspace.com/rels/user-activity-usage'
 });
 
 class ActivityQuestionUsage extends HypermediaStateMixin(BaseMixin(LitElement)) {
@@ -18,17 +21,18 @@ class ActivityQuestionUsage extends HypermediaStateMixin(BaseMixin(LitElement)) 
 		return {
 			_activityHref: {
 				observable: observableTypes.link,
-				rel: rels.activityUsage,
+				rel: rels.assignment,
 				route: [{
 					observable: observableTypes.link,
-					rel: 'https://activities.api.brightspace.com/rels/activity-usage'
+					rel: rels.activityUsage
 				}, {
 					observable: observableTypes.link,
-					rel: 'https://activities.api.brightspace.com/rels/user-activity-usage'
-				}, {
-					observable: observableTypes.link,
-					rel: 'https://api.brightspace.com/rels/assignment'
+					rel: rels.userActivityUsage
 				}]
+			},
+			_activityUsageHref: {
+				observable: observableTypes.link,
+				rel: rels.activityUsage
 			},
 			_setPoints: {
 				type: Object,
@@ -72,14 +76,13 @@ class ActivityQuestionUsage extends HypermediaStateMixin(BaseMixin(LitElement)) 
 
 	render() {
 		return html`
-		${this.points}
 		<d2l-list-item>
 			<d2l-list-item-content>
 				<div>
-					<d2l-activity-name href="${this._activityHref}" .token="${this.token}"></d2l-activity-name>
+					<d2l-hc-name href="${this._activityHref}" .token="${this.token}"></d2l-hc-name>
 				</div>
 				<div slot="secondary">
-				<d2l-activity-type href="${this._activityHref}" .token="${this.token}"></d2l-activity-type>
+					<d2l-activity-type href="${this._activityUsageHref}" .token="${this.token}"></d2l-activity-type>
 				</div>
 			</d2l-list-item-content>
 			<div class="activity_list__points_input" slot="actions">

@@ -12,16 +12,12 @@ import { heading4Styles, labelStyles } from '@brightspace-ui/core/components/typ
 import { BaseMixin } from '../mixins/base-mixin';
 import { html } from '@brightspace-hmc/foundation-engine/framework/lit/hypermedia-components.js';
 import { HypermediaStateMixin } from '@brightspace-hmc/foundation-engine/framework/lit/HypermediaStateMixin';
-import { QuizServiceFactory } from '../services/quizServiceFactory';
 
 class ActivityQuestionPoints extends HypermediaStateMixin(BaseMixin(LitElement)) {
 	static get properties() {
 		return {
 			updateDisabled: {
 				type: Boolean
-			},
-			questions: {
-				type: Array
 			}
 		};
 	}
@@ -71,21 +67,6 @@ class ActivityQuestionPoints extends HypermediaStateMixin(BaseMixin(LitElement))
 	constructor() {
 		super();
 		this._items = [];
-
-		this.quizService = QuizServiceFactory.getQuizService();
-	}
-
-	async connectedCallback() {
-		super.connectedCallback();
-
-		this.questions = await this.quizService.getQuestions();
-	}
-
-	set _entity(entity) {
-		if (this._entityHasChanged(entity)) {
-			this._onActivityUsageCollectionChanged(entity);
-			super._entity = entity;
-		}
 	}
 
 	_onActivityUsageCollectionChanged(collection) {
@@ -131,37 +112,6 @@ class ActivityQuestionPoints extends HypermediaStateMixin(BaseMixin(LitElement))
 		console.log('Cancelling update');
 	}
 
-	_renderUsage(item) {
-		const points = item.collectionItem._entity.properties.points;
-		const id = item.collectionItem._entity.properties.id;
-		return html`
-		<d2l-list-item>
-			<d2l-list-item-content>
-				<div>
-					<d2l-activity-name href="${item.activityUsage.userActivityUsageHref()}" .token="${this.token}"></d2l-activity-name>
-				</div>
-				<div slot="secondary">
-				<d2l-activity-type href="${item.activityUsage.userActivityUsageHref()}" .token="${this.token}"></d2l-activity-type>
-				</div>
-			</d2l-list-item-content>
-			<div class="activity_list__points_input" slot="actions">
-				<label for="points_input_${id}" class="points_input__label d2l-label-text">
-					${this.localize('inputLabelPoints')}
-				</label>
-				<d2l-input-number
-					id="points_input_${id}"
-					label=${this.localize('inputLabelPoints')}
-					value=${ points }
-					@change=${this._validation}
-					min = 0
-					min-exclusive
-					required
-					label-hidden>
-				</d2l-input-number>
-			</div>
-		</d2l-list-item>
-		`;
-	}
 	render() {
 		return html`
 			<div class="main_body">

@@ -6,8 +6,7 @@
   "dependencies": {
     "@brightspace-hmc/foundation-components": "git://github.com/BrightspaceHypermediaComponents/foundation-components.git",
     "@brightspace-ui/core": "^1.118.2",
-    "lit-element": "^2.4.0",
-    "siren-sdk": "github:BrightspaceHypermediaComponents/siren-sdk#semver:^1"
+    "lit-element": "^2.4.0"
   },
   "files": [
     "src/**",

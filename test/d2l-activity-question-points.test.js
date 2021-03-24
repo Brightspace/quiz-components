@@ -77,22 +77,6 @@ describe('d2l-activity-question-points', () => {
 			fixtureCleanup();
 		});
 
-		it.only('Button is disabled if invalid field', async() => {
-			setupTestData({
-				questions: defaultQuestions
-			});
-
-			const el = await fixture(defaultFixture);
-
-			//expect(el.updateDisabled).to.equal(false);
-
-			const input_1 = el.shadowRoot.querySelector('#points_input_1');
-			input_1.setAttribute('value', 0);
-			// Needed because changing the value through code does not trigger the change event
-			el._validation();
-
-			expect(el.updateDisabled).to.equal(true);
-		});
 	});
 });
 
