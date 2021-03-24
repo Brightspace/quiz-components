@@ -25,6 +25,7 @@
     "eslint-plugin-html": "^6",
     "eslint-plugin-lit": "^1",
     "eslint-plugin-sort-class-members": "^1",
+    "fetch-mock": "^9.11.0",
     "lit-analyzer": "^1",
     "sinon": "^9.0.2"
   },

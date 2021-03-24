@@ -6,7 +6,7 @@ import { runConstructor } from '@brightspace-ui/core/tools/constructor-test-help
 import sinon from 'sinon';
 
 const defaultFixture = html`
-<d2l-activity-question-points href="/base/data/activity-collection.json" token="whatever"></d2l-activity-question-points>
+<d2l-activity-question-points></d2l-activity-question-points>
 `;
 
 let getQuizServiceStub;
@@ -56,6 +56,16 @@ describe('d2l-activity-question-points', () => {
 			fixtureCleanup();
 		});
 
+		it('Displays no questions', async() => {
+			setupTestData({
+				questions: []
+			});
+
+			const el = await fixture(defaultFixture);
+			const rows = el.shadowRoot.querySelectorAll('d2l-list-item');
+			expect(rows.length).to.equal(0);
+		});
+
 		it('Displays all questions', async() => {
 			setupTestData({
 				questions: defaultQuestions
@@ -63,7 +73,7 @@ describe('d2l-activity-question-points', () => {
 
 			const el = await fixture(defaultFixture);
 			const rows = el.shadowRoot.querySelectorAll('d2l-list-item');
-			expect(rows.length).to.equal(4);
+			expect(rows.length).to.equal(3);
 		});
 	});
 
@@ -77,6 +87,22 @@ describe('d2l-activity-question-points', () => {
 			fixtureCleanup();
 		});
 
+		it('Button is disabled if invalid field', async() => {
+			setupTestData({
+				questions: defaultQuestions
+			});
+
+			const el = await fixture(defaultFixture);
+
+			expect(el.updateDisabled).to.equal(false);
+
+			const input_1 = el.shadowRoot.querySelector('#points_input_1');
+			input_1.setAttribute('value', 0);
+			// Needed because changing the value through code does not trigger the change event
+			el._validation();
+
+			expect(el.updateDisabled).to.equal(true);
+		});
 	});
 });
 
