@@ -76,12 +76,9 @@ class ActivityQuestionPoints extends HypermediaStateMixin(BaseMixin(LitElement))
 
 	_updatePoints() {
 		this._validation();
-		console.log(this.updateDisabled);
 
 		if (!this.updateDisabled) {
-			this.shadowRoot.querySelectorAll('d2l-activity-question-usage').forEach(element => {
-				element.updateValue();
-			});
+			this._state.push();
 		}
 	}
 
@@ -112,7 +109,7 @@ class ActivityQuestionPoints extends HypermediaStateMixin(BaseMixin(LitElement))
 					${this.localize('mainBodyDescription')}
 				</div>
 				<div class="main_body__activity_list">
-					<d2l-list>
+					<d2l-list separators="between">
 						${ this._questions?.map(question => this._renderQuestion(question)) }
 					</d2l-list>
 				</div>

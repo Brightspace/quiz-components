@@ -67,11 +67,6 @@ class ActivityQuestionUsage extends HypermediaStateMixin(BaseMixin(LitElement)) 
 	_onInputChange(e) {
 		this.points = e.currentTarget.value;
 
-		const updateEvent = new CustomEvent('update');
-		this.dispatchEvent(updateEvent);
-	}
-
-	updateValue() {
 		if (!this._setPoints.has) {
 			return;
 		}
@@ -84,7 +79,9 @@ class ActivityQuestionUsage extends HypermediaStateMixin(BaseMixin(LitElement)) 
 				}
 			}
 		);
-		this._state.push();
+
+		const updateEvent = new CustomEvent('update');
+		this.dispatchEvent(updateEvent);
 	}
 
 	render() {

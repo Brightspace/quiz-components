@@ -1,7 +1,7 @@
 {
 	"rel":["https://assignments.api.brightspace.com/rels/external"],
 	"properties":{
-    "name":"Something about the Cells test",
+    "name":"Something about the Cells",
     "description": "H5P Question"
 	}
 }
