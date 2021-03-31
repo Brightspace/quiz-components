@@ -20,7 +20,8 @@ class ActivityQuestionPoints extends HypermediaStateMixin(BaseMixin(LitElement))
 			},
 			_questions: {
 				observable: observableTypes.subEntities,
-				rel: 'item'
+				rel: 'item',
+				prime: true
 			}
 		};
 	}
@@ -79,6 +80,13 @@ class ActivityQuestionPoints extends HypermediaStateMixin(BaseMixin(LitElement))
 
 		if (!this.updateDisabled) {
 			this._state.push();
+
+			(window.opener || window.parent).postMessage(
+				{
+					subject: 'question_points_updated'
+				},
+				'*'
+			);
 		}
 	}
 
@@ -91,7 +99,7 @@ class ActivityQuestionPoints extends HypermediaStateMixin(BaseMixin(LitElement))
 		<d2l-activity-question-usage
 			id='activity_question_usage_${question.properties.id}'
 			href=${question.href}
-			token=${this.token}
+			.token=${this.token}
 			@update=${this._validation}>
 		</d2l-activity-question-usage>
 		`;

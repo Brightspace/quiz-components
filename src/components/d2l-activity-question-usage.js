@@ -29,11 +29,13 @@ class ActivityQuestionUsage extends HypermediaStateMixin(BaseMixin(LitElement)) 
 				}, {
 					observable: observableTypes.link,
 					rel: rels.userActivityUsage
-				}]
+				}],
+				prime: true
 			},
 			_activityUsageHref: {
 				observable: observableTypes.link,
-				rel: rels.activityUsage
+				rel: rels.activityUsage,
+				prime: true
 			},
 			_setPoints: {
 				type: Object,
