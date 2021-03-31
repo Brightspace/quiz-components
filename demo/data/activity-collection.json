@@ -13,7 +13,7 @@
           "rel": [
             "self"
           ],
-          "href": "https://dfdb7e15-7355-4554-a9a5-dbf6b8aee6e7.activities.api.proddev.d2l/activities/6606_51000_2/usages/6609/collection/1"
+          "href": "data/d2l-activity-question-usage-chained.json"
         },
         {
           "rel": [
@@ -43,7 +43,7 @@
           "rel": [
             "self"
           ],
-          "href": "https://dfdb7e15-7355-4554-a9a5-dbf6b8aee6e7.activities.api.proddev.d2l/activities/6606_51000_2/usages/6609/collection/2"
+          "href": "data/d2l-activity-question-usage-chained-2.json"
         },
         {
           "rel": [
@@ -73,7 +73,7 @@
           "rel": [
             "self"
           ],
-          "href": "https://dfdb7e15-7355-4554-a9a5-dbf6b8aee6e7.activities.api.proddev.d2l/activities/6606_51000_2/usages/6609/collection/3"
+          "href": "data/d2l-activity-question-usage-chained-3.json"
         },
         {
           "rel": [
@@ -103,7 +103,7 @@
           "rel": [
             "self"
           ],
-          "href": "https://dfdb7e15-7355-4554-a9a5-dbf6b8aee6e7.activities.api.proddev.d2l/activities/6606_51000_2/usages/6609/collection/4"
+          "href": "data/d2l-activity-question-usage-chained-4.json"
         },
         {
           "rel": [

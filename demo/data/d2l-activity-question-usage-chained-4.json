@@ -3,21 +3,21 @@
     "item"
   ],
   "properties": {
-    "id": "1",
-    "points": 10
+    "id": "4",
+    "points": 100
   },
   "links": [
     {
       "rel": [
         "self"
       ],
-      "href": "data/d2l-activity-question-usage-chained.json"
+      "href": "data/d2l-activity-question-usage-chained-4.json"
     },
     {
       "rel": [
         "https://activities.api.brightspace.com/rels/activity-usage"
       ],
-      "href": "data/activity-usage.json"
+      "href": "data/activity-usage-4.json"
     },
     {
       "rel": [

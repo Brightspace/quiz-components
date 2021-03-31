@@ -5,9 +5,10 @@ import '@brightspace-ui/core/components/colors/colors.js';
 import '@brightspace-hmc/foundation-components/components/activity/name/d2l-activity-name';
 import '@brightspace-hmc/foundation-components/components/activity/type/d2l-activity-type';
 import { css, LitElement } from 'lit-element/lit-element.js';
-import { customHypermediaElement, html } from '@brightspace-hmc/foundation-engine/framework/lit/hypermedia-components';
 import { HypermediaStateMixin, observableTypes } from '@brightspace-hmc/foundation-engine/framework/lit/HypermediaStateMixin';
 import { BaseMixin } from '../mixins/base-mixin';
+import { html } from '@brightspace-hmc/foundation-engine/framework/lit/hypermedia-components';
+import { labelStyles } from '@brightspace-ui/core/components/typography/styles.js';
 
 const rels = Object.freeze({
 	activityUsage: 'https://activities.api.brightspace.com/rels/activity-usage',
@@ -52,22 +53,34 @@ class ActivityQuestionUsage extends HypermediaStateMixin(BaseMixin(LitElement)) 
 
 	static get styles() {
 		return [ css`
+		.activity_list__points_input {
+			display: flex;
+			align-items: baseline;
+		}
 		.points_input__label {
 			margin: 12px;
 		}
-		` ];
+		`,
+		labelStyles ];
 	}
 
 	_onInputChange(e) {
+		this.points = e.currentTarget.value;
+
+		const updateEvent = new CustomEvent('update');
+		this.dispatchEvent(updateEvent);
+	}
+
+	updateValue() {
 		if (!this._setPoints.has) {
 			return;
 		}
-		const points = e.currentTarget.value;
+
 		this._setPoints.commit(
 			{
 				points: {
 					observable: observableTypes.property,
-					value: points
+					value: this.points
 				}
 			}
 		);
@@ -105,7 +118,8 @@ class ActivityQuestionUsage extends HypermediaStateMixin(BaseMixin(LitElement)) 
 	}
 
 }
-customHypermediaElement(
+
+customElements.define(
 	'd2l-activity-question-usage',
-	ActivityQuestionUsage,
+	ActivityQuestionUsage
 );
