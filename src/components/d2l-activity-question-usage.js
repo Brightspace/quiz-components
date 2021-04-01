@@ -9,13 +9,7 @@ import { HypermediaStateMixin, observableTypes } from '@brightspace-hmc/foundati
 import { BaseMixin } from '../mixins/base-mixin';
 import { html } from '@brightspace-hmc/foundation-engine/framework/lit/hypermedia-components';
 import { labelStyles } from '@brightspace-ui/core/components/typography/styles.js';
-
-const rels = Object.freeze({
-	activityUsage: 'https://activities.api.brightspace.com/rels/activity-usage',
-	external: 'https://assignments.api.brightspace.com/rels/external',
-	assignment: 'https://api.brightspace.com/rels/assignment',
-	userActivityUsage: 'https://activities.api.brightspace.com/rels/user-activity-usage'
-});
+import { rels } from '../helpers/utils';
 
 class ActivityQuestionUsage extends HypermediaStateMixin(BaseMixin(LitElement)) {
 	static get properties() {
@@ -42,9 +36,10 @@ class ActivityQuestionUsage extends HypermediaStateMixin(BaseMixin(LitElement)) 
 				observable: observableTypes.action,
 				name: 'set-points'
 			},
-			id: {
+			questionId: {
 				type: String,
-				observable: observableTypes.property
+				observable: observableTypes.property,
+				name: 'id'
 			},
 			points: {
 				type: String,
@@ -87,12 +82,6 @@ class ActivityQuestionUsage extends HypermediaStateMixin(BaseMixin(LitElement)) 
 	}
 
 	render() {
-		console.log(this.href);
-		console.log(this._activityHref);
-		console.log(this.token);
-		console.log(this._activityUsageHref);
-		console.log(this.id);
-		console.log(this.points);
 		return html`
 		<d2l-list-item>
 			<d2l-list-item-content>
@@ -104,11 +93,11 @@ class ActivityQuestionUsage extends HypermediaStateMixin(BaseMixin(LitElement)) 
 				</div>
 			</d2l-list-item-content>
 			<div class="activity_list__points_input" slot="actions">
-				<label for="points_input_${this.id}" class="points_input__label d2l-label-text">
+				<label for="points_input_${this.questionId}" class="points_input__label d2l-label-text">
 					${this.localize('inputLabelPoints')}
 				</label>
 				<d2l-input-number
-					id="points_input_${this.id}"
+					id="points_input_${this.questionId}"
 					label=${this.localize('inputLabelPoints')}
 					value=${ this.points }
 					@change="${this._onInputChange}"
