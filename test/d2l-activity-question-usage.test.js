@@ -9,7 +9,21 @@ async function _createComponent(path) {
 	return await createComponentAndWait(html`<d2l-activity-question-usage href="${path}" token="test-token"></d2l-activity-question-usage>`);
 }
 
-describe.only('d2l-activity-question-usage', () => {
+// TODO: put this somewhere common
+const rels = Object.freeze({
+	activityUsage: 'https://activities.api.brightspace.com/rels/activity-usage',
+	external: 'https://assignments.api.brightspace.com/rels/external',
+	assignment: 'https://api.brightspace.com/rels/assignment',
+	userActivityUsage: 'https://activities.api.brightspace.com/rels/user-activity-usage'
+});
+
+describe('d2l-activity-question-usage', () => {
+	const id = 13;
+	const points = 20;
+	const activityUsageHref = '/activity-usage';
+	const userActivityUsageHref = '/user-activity-usage';
+	const assignmentHref = '/assignment';
+
 	before(() => {
 		mockLink.reset();
 		// add appropriate data to fetch mock
@@ -18,9 +32,44 @@ describe.only('d2l-activity-question-usage', () => {
 				'item'
 			],
 			properties: {
-				id: '1',
-				points: 10
-			}},
+				id,
+				points
+			},
+			links: [
+				{
+					rel: [
+						rels.activityUsage
+					],
+					href: activityUsageHref
+				}
+			]
+		},
+		_createComponent
+		);
+
+		addToMock(activityUsageHref, {
+			links: [
+				{
+					rel: [
+						rels.userActivityUsage
+					],
+					href: userActivityUsageHref
+				}
+			]
+		},
+		_createComponent
+		);
+
+		addToMock(userActivityUsageHref, {
+			links: [
+				{
+					rel: [
+						rels.assignment
+					],
+					href: assignmentHref
+				}
+			]
+		},
 		_createComponent
 		);
 	});
@@ -52,15 +101,34 @@ describe.only('d2l-activity-question-usage', () => {
 			mockLink.resetHistory();
 		});
 
-		it('should display correct question', async() => {
+		//check right values get displayed
+		//check event is triggered on value changed
+		//check commit is made and value updated on value changed
+
+		it('should display correct data', async() => {
 			const el = await _createComponent('/activity-question-usage');
-			const rows = el.shadowRoot.querySelectorAll('d2l-list-item');
-			expect(rows.length).to.equal(1);
+			const name = el.shadowRoot.querySelector('d2l-hc-name');
+			const type = el.shadowRoot.querySelector('d2l-activity-type');
+			const input = el.shadowRoot.querySelector(`#points_input_${id}`);
+
+			console.log(name);
+			console.log(type);
+			console.log(input);
+
+			expect(name.href).to.equal(assignmentHref);
+			expect(type.href).to.equal(activityUsageHref);
+			expect(input.value).to.equal(points);
 		});
 
-		it('should allow a user to change point values', async() => {
-			await _createComponent('/activity-question-usage');
-			//fill this in
-		});
+		// it('should display correct question', async() => {
+		// 	const el = await _createComponent('/activity-question-usage');
+		// 	const rows = el.shadowRoot.querySelectorAll('d2l-list-item');
+		// 	expect(rows.length).to.equal(1);
+		// });
+
+		// it('should allow a user to change point values', async() => {
+		// 	await _createComponent('/activity-question-usage');
+		// 	//fill this in
+		// });
 	});
 });

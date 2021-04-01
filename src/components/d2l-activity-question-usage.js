@@ -87,6 +87,12 @@ class ActivityQuestionUsage extends HypermediaStateMixin(BaseMixin(LitElement)) 
 	}
 
 	render() {
+		console.log(this.href);
+		console.log(this._activityHref);
+		console.log(this.token);
+		console.log(this._activityUsageHref);
+		console.log(this.id);
+		console.log(this.points);
 		return html`
 		<d2l-list-item>
 			<d2l-list-item-content>
