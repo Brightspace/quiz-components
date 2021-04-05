@@ -80,10 +80,10 @@ class ActivityQuestionPoints extends HypermediaStateMixin(BaseMixin(LitElement))
 		this._validation();
 
 		if (!this.updateDisabled) {
-			this._state.push();
-			// this.shadowRoot.querySelectorAll('d2l-activity-question-usage').forEach(element => {
-			// 	element._state.push();
-			// });
+			//temporary way of pushing the state
+			this.shadowRoot.querySelectorAll('d2l-activity-question-usage').forEach(element => {
+				element._state.push();
+			});
 
 			(window.opener || window.parent).postMessage(
 				{
