@@ -11,7 +11,6 @@ import { heading4Styles, labelStyles } from '@brightspace-ui/core/components/typ
 import { HypermediaStateMixin, observableTypes } from '@brightspace-hmc/foundation-engine/framework/lit/HypermediaStateMixin';
 import { BaseMixin } from '../mixins/base-mixin';
 import { html } from '@brightspace-hmc/foundation-engine/framework/lit/hypermedia-components';
-import { rels } from '../helpers/utils';
 
 class ActivityQuestionPoints extends HypermediaStateMixin(BaseMixin(LitElement)) {
 	static get properties() {
@@ -21,7 +20,7 @@ class ActivityQuestionPoints extends HypermediaStateMixin(BaseMixin(LitElement))
 			},
 			_questions: {
 				observable: observableTypes.subEntities,
-				rel: rels.item,
+				rel: 'item',
 				prime: true
 			}
 		};

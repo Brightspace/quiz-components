@@ -1,5 +1,10 @@
 import { addToMock } from './fetchMock';
-import { rels } from '../../src/helpers/utils';
+
+const rels = Object.freeze({
+	activityUsage: 'https://activities.api.brightspace.com/rels/activity-usage',
+	assignment: 'https://api.brightspace.com/rels/assignment',
+	userActivityUsage: 'https://activities.api.brightspace.com/rels/user-activity-usage'
+});
 
 export function mockActivityCollection(activityQuestionUsages, createComponent) {
 	const entities = [];
