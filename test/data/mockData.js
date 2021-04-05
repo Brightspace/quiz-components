@@ -101,3 +101,33 @@ export function mockUserActivityUsage(assignmentHref) {
 		]
 	};
 }
+
+export const activityCollection = [
+	{
+		id: 1,
+		points: 10,
+		activityUsageHref: '/activity-usage',
+		activityQuestionUsageHref: '/activity-question-usage'
+	},
+	{
+		id: 2,
+		points: 20,
+		activityUsageHref: '/activity-usage-2',
+		activityQuestionUsageHref: '/activity-question-usage-2'
+	},
+	{
+		id: 3,
+		points: 30,
+		activityUsageHref: '/activity-usage-3',
+		activityQuestionUsageHref: '/activity-question-usage-3'
+	}
+];
+
+export const activityCollectionSingleItem = [
+	{
+		id: 1,
+		points: 10,
+		activityUsageHref: '/activity-usage',
+		activityQuestionUsageHref: '/activity-question-usage'
+	}
+];
