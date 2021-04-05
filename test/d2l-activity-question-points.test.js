@@ -3,6 +3,7 @@ import { addToMock, mockLink } from './data/fetchMock';
 import { expect, html } from '@open-wc/testing';
 import { clearStore } from '@brightspace-hmc/foundation-engine/state/HypermediaState.js';
 import { createComponentAndWait } from '@brightspace-hmc/foundation-components/test/test-util';
+import { mockActivityCollection } from './data/mockData';
 import { runConstructor } from '@brightspace-ui/core/tools/constructor-test-helper.js';
 import { stub } from 'sinon';
 
@@ -20,114 +21,48 @@ describe('d2l-activity-question-points', () => {
 	before(() => {
 		mockLink.reset();
 		// add appropriate data to fetch mock
-		addToMock(activityCollectionHref, {
-			entities: [
-				{
-					rel: [
-						'item'
-					],
-					properties: {
+		addToMock(
+			activityCollectionHref,
+			mockActivityCollection(
+				[
+					{
 						id: 1,
-						points: 10
+						points: 10,
+						activityUsageHref: '/activity-usage',
+						activityQuestionUsageHref
 					},
-					links: [
-						{
-							rel: ['self'],
-							href: activityQuestionUsageHref
-						}
-					]
-				},
-				{
-					rel: [
-						'item'
-					],
-					properties: {
+					{
 						id: 2,
-						points: 20
+						points: 20,
+						activityUsageHref: '/activity-usage-2',
+						activityQuestionUsageHref: activityQuestionUsage2Href
 					},
-					links: [
-						{
-							rel: ['self'],
-							href: activityQuestionUsage2Href
-						}
-					]
-				},
-				{
-					rel: [
-						'item'
-					],
-					properties: {
+					{
 						id: 3,
-						points: 30
-					},
-					links: [
-						{
-							rel: ['self'],
-							href: activityQuestionUsage3Href
-						}
-					]
-				}
-			]
-		},
-		_createComponent
+						points: 30,
+						activityUsageHref: '/activity-usage-3',
+						activityQuestionUsageHref: activityQuestionUsage3Href
+					}
+				],
+				_createComponent
+			),
+			_createComponent
 		);
 
-		addToMock(activityCollection2Href, {
-			entities: [
-				{
-					rel: [
-						'item'
-					],
-					properties: {
+		addToMock(
+			activityCollection2Href,
+			mockActivityCollection(
+				[
+					{
 						id: 1,
-						points: 10
-					},
-					links: [
-						{
-							rel: ['self'],
-							href: activityQuestionUsageHref
-						}
-					]
-				}
-			]
-		},
-		_createComponent
-		);
-
-		addToMock(activityQuestionUsageHref, {
-			rel: [
-				'item'
-			],
-			properties: {
-				id: 1,
-				points: 10
-			}
-		},
-		_createComponent
-		);
-
-		addToMock(activityQuestionUsage2Href, {
-			rel: [
-				'item'
-			],
-			properties: {
-				id: 2,
-				points: 20
-			}
-		},
-		_createComponent
-		);
-
-		addToMock(activityQuestionUsage3Href, {
-			rel: [
-				'item'
-			],
-			properties: {
-				id: 3,
-				points: 30
-			}
-		},
-		_createComponent
+						points: 10,
+						activityUsageHref: '/activity-usage',
+						activityQuestionUsageHref
+					}
+				],
+				_createComponent
+			),
+			_createComponent
 		);
 	});
 
@@ -158,16 +93,18 @@ describe('d2l-activity-question-points', () => {
 			mockLink.resetHistory();
 		});
 
-		it('should display correct data', async() => {
+		it('should display a list of questions', async() => {
 			const el = await _createComponent(activityCollectionHref);
 			const rows = el.shadowRoot.querySelectorAll('d2l-activity-question-usage');
 
 			expect(rows.length).to.equal(3);
+		});
 
-			const el2 = await _createComponent(activityCollection2Href);
-			const rows2 = el2.shadowRoot.querySelectorAll('d2l-activity-question-usage');
+		it('should display a single question', async() => {
+			const el = await _createComponent(activityCollection2Href);
+			const rows = el.shadowRoot.querySelectorAll('d2l-activity-question-usage');
 
-			expect(rows2.length).to.equal(1);
+			expect(rows.length).to.equal(1);
 		});
 
 		const invalidValues = [0, -1, null, undefined];
@@ -180,7 +117,7 @@ describe('d2l-activity-question-points', () => {
 				expect(el.updateDisabled).to.equal(false);
 
 				activityQuestionUsage.points = invalidValue;
-				const updateEvent = new CustomEvent('update');
+				const updateEvent = new CustomEvent('d2l-activity-question-usage-input-updated');
 				activityQuestionUsage.dispatchEvent(updateEvent);
 
 				expect(el.updateDisabled).to.equal(true);

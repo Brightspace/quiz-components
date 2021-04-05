@@ -11,6 +11,7 @@ import { heading4Styles, labelStyles } from '@brightspace-ui/core/components/typ
 import { HypermediaStateMixin, observableTypes } from '@brightspace-hmc/foundation-engine/framework/lit/HypermediaStateMixin';
 import { BaseMixin } from '../mixins/base-mixin';
 import { html } from '@brightspace-hmc/foundation-engine/framework/lit/hypermedia-components';
+import { rels } from '../helpers/utils';
 
 class ActivityQuestionPoints extends HypermediaStateMixin(BaseMixin(LitElement)) {
 	static get properties() {
@@ -20,7 +21,7 @@ class ActivityQuestionPoints extends HypermediaStateMixin(BaseMixin(LitElement))
 			},
 			_questions: {
 				observable: observableTypes.subEntities,
-				rel: 'item',
+				rel: rels.item,
 				prime: true
 			}
 		};
@@ -80,6 +81,9 @@ class ActivityQuestionPoints extends HypermediaStateMixin(BaseMixin(LitElement))
 
 		if (!this.updateDisabled) {
 			this._state.push();
+			// this.shadowRoot.querySelectorAll('d2l-activity-question-usage').forEach(element => {
+			// 	element._state.push();
+			// });
 
 			(window.opener || window.parent).postMessage(
 				{
@@ -91,7 +95,12 @@ class ActivityQuestionPoints extends HypermediaStateMixin(BaseMixin(LitElement))
 	}
 
 	_cancelUpdate() {
-		console.log('Cancelling update');
+		(window.opener || window.parent).postMessage(
+			{
+				subject: 'question_points_updated'
+			},
+			'*'
+		);
 	}
 
 	_renderQuestion(question) {
@@ -100,7 +109,7 @@ class ActivityQuestionPoints extends HypermediaStateMixin(BaseMixin(LitElement))
 			id='activity_question_usage_${question.properties.id}'
 			href=${question.href}
 			.token=${this.token}
-			@update=${this._validation}>
+			@d2l-activity-question-usage-input-updated=${this._validation}>
 		</d2l-activity-question-usage>
 		`;
 	}

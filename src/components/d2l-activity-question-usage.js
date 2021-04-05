@@ -32,7 +32,6 @@ class ActivityQuestionUsage extends HypermediaStateMixin(BaseMixin(LitElement)) 
 				prime: true
 			},
 			_setPoints: {
-				type: Object,
 				observable: observableTypes.action,
 				name: 'set-points'
 			},
@@ -62,8 +61,6 @@ class ActivityQuestionUsage extends HypermediaStateMixin(BaseMixin(LitElement)) 
 	}
 
 	_onInputChange(e) {
-		this.points = e.currentTarget.value;
-
 		if (!this._setPoints.has) {
 			return;
 		}
@@ -72,12 +69,12 @@ class ActivityQuestionUsage extends HypermediaStateMixin(BaseMixin(LitElement)) 
 			{
 				points: {
 					observable: observableTypes.property,
-					value: this.points
+					value: e.currentTarget.value
 				}
 			}
 		);
 
-		const updateEvent = new CustomEvent('update');
+		const updateEvent = new CustomEvent('d2l-activity-question-usage-input-updated');
 		this.dispatchEvent(updateEvent);
 	}
 

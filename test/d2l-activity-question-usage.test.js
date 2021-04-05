@@ -1,9 +1,9 @@
 import '../src/components/d2l-activity-question-usage';
 import { addToMock, mockLink } from './data/fetchMock';
 import { expect, html } from '@open-wc/testing';
+import { mockActivityQuestionUsage, mockActivityUsage, mockUserActivityUsage } from './data/mockData';
 import { clearStore } from '@brightspace-hmc/foundation-engine/state/HypermediaState.js';
 import { createComponentAndWait } from '@brightspace-hmc/foundation-components/test/test-util';
-import { rels } from '../src/helpers/utils';
 import { runConstructor } from '@brightspace-ui/core/tools/constructor-test-helper.js';
 
 async function _createComponent(path) {
@@ -21,71 +21,32 @@ describe('d2l-activity-question-usage', () => {
 	before(() => {
 		mockLink.reset();
 		// add appropriate data to fetch mock
-		addToMock(activityQuestionUsageHref, {
-			rel: [
-				'item'
-			],
-			properties: {
+		addToMock(
+			activityQuestionUsageHref,
+			mockActivityQuestionUsage(
 				id,
-				points
-			},
-			links: [
-				{
-					rel: [
-						rels.activityUsage
-					],
-					href: activityUsageHref
-				}
-			],
-			actions: [
-				{
-					href: 'some-href',
-					name: 'set-points',
-					method: 'PATCH',
-					fields: [
-						{
-							type: 'number',
-							name: 'points'
-						}
-					]
-				}
-			]
-		},
-		_createComponent
+				points,
+				activityUsageHref
+			),
+			_createComponent
 		);
 
-		addToMock(activityUsageHref, {
-			class: [
-				'activity-usage'
-			],
-			links: [
-				{
-					rel: [
-						rels.userActivityUsage
-					],
-					href: userActivityUsageHref
-				}
-			]
-		},
-		_createComponent
+		addToMock(
+			activityUsageHref,
+			mockActivityUsage(userActivityUsageHref),
+			_createComponent
 		);
 
-		addToMock(userActivityUsageHref, {
-			links: [
-				{
-					rel: [
-						rels.assignment
-					],
-					href: assignmentHref
-				}
-			]
-		},
-		_createComponent
+		addToMock(
+			userActivityUsageHref,
+			mockUserActivityUsage(assignmentHref),
+			_createComponent
 		);
 
-		addToMock(assignmentHref, {
-		},
-		_createComponent
+		addToMock(
+			assignmentHref,
+			{},
+			_createComponent
 		);
 	});
 
@@ -131,7 +92,7 @@ describe('d2l-activity-question-usage', () => {
 			const el = await _createComponent(activityQuestionUsageHref);
 			const input = el.shadowRoot.querySelector(`#points_input_${id}`);
 
-			el.addEventListener('update', () => {
+			el.addEventListener('d2l-activity-question-usage-input-updated', () => {
 				expect(el.points).to.equal(newPoints);
 			});
 
