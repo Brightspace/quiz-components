@@ -1,10 +1,10 @@
 {
   "name": "quiz-components",
-  "version": "1.0.6",
+  "version": "1.0.9",
   "description": "",
   "main": "index.js",
   "dependencies": {
-    "@brightspace-hmc/foundation-components": "git://github.com/BrightspaceHypermediaComponents/foundation-components.git",
+    "@brightspace-hmc/foundation-components": "BrightspaceHypermediaComponents/foundation-components.git#semver:^0",
     "@brightspace-ui/core": "^1.118.2",
     "lit-element": "^2.4.0"
   },

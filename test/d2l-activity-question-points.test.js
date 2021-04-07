@@ -1,9 +1,9 @@
 import '../src/components/d2l-activity-question-points';
+import { activityCollection, activityCollectionSingleItem, mockActivityCollection } from './data/mockData';
 import { addToMock, mockLink } from './data/fetchMock';
 import { expect, html } from '@open-wc/testing';
 import { clearStore } from '@brightspace-hmc/foundation-engine/state/HypermediaState.js';
 import { createComponentAndWait } from '@brightspace-hmc/foundation-components/test/test-util';
-import { mockActivityCollection } from './data/mockData';
 import { runConstructor } from '@brightspace-ui/core/tools/constructor-test-helper.js';
 import { stub } from 'sinon';
 
@@ -14,36 +14,15 @@ async function _createComponent(path) {
 describe('d2l-activity-question-points', () => {
 	const activityCollectionHref = '/activity-collection';
 	const activityCollection2Href = '/activity-collection-2';
-	const activityQuestionUsageHref = '/activity-question-usage';
-	const activityQuestionUsage2Href = '/activity-question-usage-2';
-	const activityQuestionUsage3Href = '/activity-question-usage-3';
 
 	before(() => {
+		clearStore();
 		mockLink.reset();
 		// add appropriate data to fetch mock
 		addToMock(
 			activityCollectionHref,
 			mockActivityCollection(
-				[
-					{
-						id: 1,
-						points: 10,
-						activityUsageHref: '/activity-usage',
-						activityQuestionUsageHref
-					},
-					{
-						id: 2,
-						points: 20,
-						activityUsageHref: '/activity-usage-2',
-						activityQuestionUsageHref: activityQuestionUsage2Href
-					},
-					{
-						id: 3,
-						points: 30,
-						activityUsageHref: '/activity-usage-3',
-						activityQuestionUsageHref: activityQuestionUsage3Href
-					}
-				],
+				activityCollection,
 				_createComponent
 			),
 			_createComponent
@@ -52,14 +31,7 @@ describe('d2l-activity-question-points', () => {
 		addToMock(
 			activityCollection2Href,
 			mockActivityCollection(
-				[
-					{
-						id: 1,
-						points: 10,
-						activityUsageHref: '/activity-usage',
-						activityQuestionUsageHref
-					}
-				],
+				activityCollectionSingleItem,
 				_createComponent
 			),
 			_createComponent
@@ -97,14 +69,14 @@ describe('d2l-activity-question-points', () => {
 			const el = await _createComponent(activityCollectionHref);
 			const rows = el.shadowRoot.querySelectorAll('d2l-activity-question-usage');
 
-			expect(rows.length).to.equal(3);
+			expect(rows.length).to.equal(activityCollection.length);
 		});
 
 		it('should display a single question', async() => {
 			const el = await _createComponent(activityCollection2Href);
 			const rows = el.shadowRoot.querySelectorAll('d2l-activity-question-usage');
 
-			expect(rows.length).to.equal(1);
+			expect(rows.length).to.equal(activityCollectionSingleItem.length);
 		});
 
 		it('on update points state gets pushed', async() => {

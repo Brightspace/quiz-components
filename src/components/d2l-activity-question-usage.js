@@ -9,7 +9,12 @@ import { HypermediaStateMixin, observableTypes } from '@brightspace-hmc/foundati
 import { BaseMixin } from '../mixins/base-mixin';
 import { html } from '@brightspace-hmc/foundation-engine/framework/lit/hypermedia-components';
 import { labelStyles } from '@brightspace-ui/core/components/typography/styles.js';
-import { rels } from '../helpers/utils';
+
+const rels = Object.freeze({
+	activityUsage: 'https://activities.api.brightspace.com/rels/activity-usage',
+	assignment: 'https://api.brightspace.com/rels/assignment',
+	userActivityUsage: 'https://activities.api.brightspace.com/rels/user-activity-usage'
+});
 
 class ActivityQuestionUsage extends HypermediaStateMixin(BaseMixin(LitElement)) {
 	static get properties() {

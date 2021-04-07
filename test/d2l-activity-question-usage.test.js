@@ -19,6 +19,7 @@ describe('d2l-activity-question-usage', () => {
 	const assignmentHref = '/assignment';
 
 	before(() => {
+		clearStore();
 		mockLink.reset();
 		// add appropriate data to fetch mock
 		addToMock(
