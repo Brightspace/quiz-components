@@ -76,11 +76,11 @@ class ActivityQuestionPoints extends HypermediaStateMixin(BaseMixin(LitElement))
 		}, false);
 	}
 
-	_updatePoints() {
+	async _updatePoints() {
 		this._validation();
 
 		if (!this.updateDisabled) {
-			this._state.push();
+			await this._state.push();
 
 			(window.opener || window.parent).postMessage(
 				{
