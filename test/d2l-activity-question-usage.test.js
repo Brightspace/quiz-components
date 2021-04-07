@@ -102,7 +102,7 @@ describe('d2l-activity-question-usage', () => {
 			input.dispatchEvent(updateEvent);
 		});
 
-		const invalidValues = [0, -1, null, undefined];
+		const invalidValues = [0, -1, null, undefined, 10000];
 
 		invalidValues.forEach(invalidValue => {
 			it(`should be invalid for ${invalidValue}`, async() => {
