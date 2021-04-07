@@ -107,23 +107,6 @@ describe('d2l-activity-question-points', () => {
 			expect(rows.length).to.equal(1);
 		});
 
-		const invalidValues = [0, -1, null, undefined];
-
-		invalidValues.forEach(invalidValue => {
-			it(`should disable update button for ${invalidValue}`, async() => {
-				const el = await _createComponent(activityCollectionHref);
-				const activityQuestionUsage = el.shadowRoot.querySelector('d2l-activity-question-usage');
-
-				expect(el.updateDisabled).to.equal(false);
-
-				activityQuestionUsage.points = invalidValue;
-				const updateEvent = new CustomEvent('d2l-activity-question-usage-input-updated');
-				activityQuestionUsage.dispatchEvent(updateEvent);
-
-				expect(el.updateDisabled).to.equal(true);
-			});
-		});
-
 		it('on update points state gets pushed', async() => {
 			const el = await _createComponent(activityCollectionHref);
 			const updateButton = el.shadowRoot.querySelector('.button_group__button');

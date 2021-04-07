@@ -100,5 +100,17 @@ describe('d2l-activity-question-usage', () => {
 			const updateEvent = new CustomEvent('change');
 			input.dispatchEvent(updateEvent);
 		});
+
+		const invalidValues = [0, -1, null, undefined];
+
+		invalidValues.forEach(invalidValue => {
+			it(`should be invalid for ${invalidValue}`, async() => {
+				const el = await _createComponent(activityQuestionUsageHref);
+
+				el.points = invalidValue;
+
+				expect(!el.isValid()).to.be.true;
+			});
+		});
 	});
 });

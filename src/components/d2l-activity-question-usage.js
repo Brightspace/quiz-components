@@ -78,6 +78,10 @@ class ActivityQuestionUsage extends HypermediaStateMixin(BaseMixin(LitElement)) 
 		this.dispatchEvent(updateEvent);
 	}
 
+	isValid() {
+		return this.points && this.points > 0;
+	}
+
 	render() {
 		return html`
 		<d2l-list-item>
