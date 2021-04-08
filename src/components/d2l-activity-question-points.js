@@ -38,11 +38,11 @@ class ActivityQuestionPoints extends HypermediaStateMixin(BaseMixin(LitElement))
 				display: flex;
 				padding: 0px 30px;
 			}
-			.main_body__description {
+			.main_body_content {
 				padding: 30px;
 			}
-			.main_body__warning {
-				padding: 0px 30px 10px 30px;
+			.main_body_content__description {
+				padding-bottom: 18px;
 			}
 			.main_body__activity_list {
 				padding: 30px;
@@ -117,11 +117,13 @@ class ActivityQuestionPoints extends HypermediaStateMixin(BaseMixin(LitElement))
 						${this.localize('mainBodyTitle')}
 					</div>
 				</div>
-				<div class="main_body__description">
-					${this.localize('mainBodyDescription')}
-				</div>
-				<div class="main_body__warning">
-					${this.localize('mainBodyWarning')}
+				<div class="main_body_content">
+					<div class="main_body_content__description">
+						${this.localize('mainBodyDescription')}
+					</div>
+					<div>
+						${this.localize('mainBodyWarning')}
+					</div>
 				</div>
 				<div class="main_body__activity_list">
 					<d2l-list separators="between">
