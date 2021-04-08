@@ -41,6 +41,9 @@ class ActivityQuestionPoints extends HypermediaStateMixin(BaseMixin(LitElement))
 			.main_body__description {
 				padding: 30px;
 			}
+			.main_body__warning {
+				padding: 0px 30px 10px 30px;
+			}
 			.main_body__activity_list {
 				padding: 30px;
 				padding-top: 0;
@@ -116,8 +119,8 @@ class ActivityQuestionPoints extends HypermediaStateMixin(BaseMixin(LitElement))
 				</div>
 				<div class="main_body__description">
 					${this.localize('mainBodyDescription')}
-					<br>
-					<br>
+				</div>
+				<div class="main_body__warning">
 					${this.localize('mainBodyWarning')}
 				</div>
 				<div class="main_body__activity_list">
