@@ -116,6 +116,9 @@ class ActivityQuestionPoints extends HypermediaStateMixin(BaseMixin(LitElement))
 				</div>
 				<div class="main_body__description">
 					${this.localize('mainBodyDescription')}
+					<br>
+					<br>
+					${this.localize('mainBodyWarning')}
 				</div>
 				<div class="main_body__activity_list">
 					<d2l-list separators="between">
