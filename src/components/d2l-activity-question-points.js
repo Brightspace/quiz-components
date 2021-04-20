@@ -29,6 +29,7 @@ class ActivityQuestionPoints extends HypermediaStateMixin(BaseMixin(LitElement))
 	static get styles() {
 		const activityQuestionPointsStyles = css`
 			.main_body {
+				max-width: 723px;
 				border: 1px solid var(--d2l-color-gypsum);
 				border-radius: 8px;
 			}
