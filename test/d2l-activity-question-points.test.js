@@ -81,7 +81,7 @@ describe('d2l-activity-question-points', () => {
 
 		it('on update points state gets pushed', async() => {
 			const el = await _createComponent(activityCollectionHref);
-			const updateButton = el.shadowRoot.querySelector('.button_group__button');
+			const updateButton = el.shadowRoot.querySelector('.d2l-activity-question-points-button_group__button');
 
 			const pushStub = stub(el._state, 'push');
 
