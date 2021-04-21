@@ -28,37 +28,37 @@ class ActivityQuestionPoints extends HypermediaStateMixin(BaseMixin(LitElement))
 
 	static get styles() {
 		const activityQuestionPointsStyles = css`
-			.component_body {
+			.d2l-activity-question-points-component_body {
 				max-width: 723px;
 				margin: auto;
 			}
-			.main_body {
+			.d2l-activity-question-points-main_body {
 				border: 1px solid var(--d2l-color-gypsum);
 				border-radius: 8px;
 			}
-			.main_body__title {
+			.d2l-activity-question-points-main_body__title {
 				background-color: var(--d2l-color-regolith);
 				border-bottom: 1px solid var(--d2l-color-gypsum);
 				display: flex;
 				padding: 0px 30px;
 			}
-			.main_body_content {
+			.d2l-activity-question-points-main_body_content {
 				padding: 30px;
 			}
-			.main_body_content__description {
+			.d2l-activity-question-points-main_body_content__description {
 				padding-bottom: 18px;
 			}
-			.main_body__activity_list {
+			.d2l-activity-question-points-main_body__activity_list {
 				padding: 30px;
 				padding-top: 0;
 			}
-			.button_group {
+			.d2l-activity-question-points-button_group {
 				margin: 30px;
 			}
-			.button_group__button {
+			.d2l-activity-question-points-button_group__button {
 				margin-right: 12px;
 			}
-			:host([dir="rtl"]) .button_group__button {
+			:host([dir="rtl"]) .d2l-activity-question-points-button_group__button {
 				margin-left: 12px;
 				margin-right: 0px;
 			}
@@ -115,37 +115,37 @@ class ActivityQuestionPoints extends HypermediaStateMixin(BaseMixin(LitElement))
 
 	render() {
 		return html`
-			<div class="component_body">
-				<div class="main_body">
-					<div class="main_body__title">
+			<div class="d2l-activity-question-points-component_body">
+				<div class="d2l-activity-question-points-main_body">
+					<div class="d2l-activity-question-points-main_body__title">
 						<div class="d2l-heading-4">
 							${this.localize('mainBodyTitle')}
 						</div>
 					</div>
-					<div class="main_body_content">
-						<div class="main_body_content__description">
+					<div class="d2l-activity-question-points-main_body_content">
+						<div class="d2l-activity-question-points-main_body_content__description">
 							${this.localize('mainBodyDescription')}
 						</div>
 						<div>
 							${this.localize('mainBodyWarning')}
 						</div>
 					</div>
-					<div class="main_body__activity_list">
+					<div class="d2l-activity-question-points-main_body__activity_list">
 						<d2l-list separators="between">
 							${ this._questions?.map(question => this._renderQuestion(question)) }
 						</d2l-list>
 					</div>
 				</div>
-				<div class="button_group">
+				<div class="d2l-activity-question-points-button_group">
 					<d2l-button
-						class="button_group__button"
+						class="d2l-activity-question-points-button_group__button"
 						primary
 						?disabled=${this.updateDisabled}
 						@click=${this._updatePoints}>
 						${this.localize('buttonUpdate')}
 					</d2l-button>
 					<d2l-button
-						class="button_group__button"
+						class="d2l-activity-question-points-button_group__button"
 						@click=${this._notifyParent}>
 						${this.localize('buttonCancel')}
 					</d2l-button>
