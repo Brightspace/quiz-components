@@ -28,9 +28,11 @@ class ActivityQuestionPoints extends HypermediaStateMixin(BaseMixin(LitElement))
 
 	static get styles() {
 		const activityQuestionPointsStyles = css`
-			.main_body {
+			.component_body {
 				max-width: 723px;
 				margin: auto;
+			}
+			.main_body {
 				border: 1px solid var(--d2l-color-gypsum);
 				border-radius: 8px;
 			}
@@ -113,39 +115,41 @@ class ActivityQuestionPoints extends HypermediaStateMixin(BaseMixin(LitElement))
 
 	render() {
 		return html`
-			<div class="main_body">
-				<div class="main_body__title">
-					<div class="d2l-heading-4">
-						${this.localize('mainBodyTitle')}
+			<div class="component_body">
+				<div class="main_body">
+					<div class="main_body__title">
+						<div class="d2l-heading-4">
+							${this.localize('mainBodyTitle')}
+						</div>
+					</div>
+					<div class="main_body_content">
+						<div class="main_body_content__description">
+							${this.localize('mainBodyDescription')}
+						</div>
+						<div>
+							${this.localize('mainBodyWarning')}
+						</div>
+					</div>
+					<div class="main_body__activity_list">
+						<d2l-list separators="between">
+							${ this._questions?.map(question => this._renderQuestion(question)) }
+						</d2l-list>
 					</div>
 				</div>
-				<div class="main_body_content">
-					<div class="main_body_content__description">
-						${this.localize('mainBodyDescription')}
-					</div>
-					<div>
-						${this.localize('mainBodyWarning')}
-					</div>
+				<div class="button_group">
+					<d2l-button
+						class="button_group__button"
+						primary
+						?disabled=${this.updateDisabled}
+						@click=${this._updatePoints}>
+						${this.localize('buttonUpdate')}
+					</d2l-button>
+					<d2l-button
+						class="button_group__button"
+						@click=${this._notifyParent}>
+						${this.localize('buttonCancel')}
+					</d2l-button>
 				</div>
-				<div class="main_body__activity_list">
-					<d2l-list separators="between">
-						${ this._questions?.map(question => this._renderQuestion(question)) }
-					</d2l-list>
-				</div>
-			</div>
-			<div class="button_group">
-				<d2l-button
-					class="button_group__button"
-					primary
-					?disabled=${this.updateDisabled}
-					@click=${this._updatePoints}>
-					${this.localize('buttonUpdate')}
-				</d2l-button>
-				<d2l-button
-					class="button_group__button"
-					@click=${this._notifyParent}>
-					${this.localize('buttonCancel')}
-				</d2l-button>
 			</div>
 		`;
 	}
