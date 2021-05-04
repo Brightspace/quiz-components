@@ -12,8 +12,7 @@ import { labelStyles } from '@brightspace-ui/core/components/typography/styles.j
 
 const rels = Object.freeze({
 	activityUsage: 'https://activities.api.brightspace.com/rels/activity-usage',
-	assignment: 'https://api.brightspace.com/rels/assignment',
-	userActivityUsage: 'https://activities.api.brightspace.com/rels/user-activity-usage'
+	linkPlacement: 'https://lti.api.brightspace.com/rels/link-placement'
 });
 
 const MIN_VALUE = 0;
@@ -24,13 +23,10 @@ class ActivityQuestionUsage extends HypermediaStateMixin(BaseMixin(LitElement)) 
 		return {
 			_activityHref: {
 				observable: observableTypes.link,
-				rel: rels.assignment,
+				rel: rels.linkPlacement,
 				route: [{
 					observable: observableTypes.link,
 					rel: rels.activityUsage
-				}, {
-					observable: observableTypes.link,
-					rel: rels.userActivityUsage
 				}],
 				prime: true
 			},

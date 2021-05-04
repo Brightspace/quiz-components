@@ -79,6 +79,12 @@
         "https://api.brightspace.com/rels/specialization"
       ],
       "href": "https://dfdb7e15-7355-4554-a9a5-dbf6b8aee6e7.questions.api.proddev.d2l/question/6609/7/7"
+    },
+    {
+        "rel": [
+            "https://lti.api.brightspace.com/rels/link-placement"
+        ],
+        "href": "data/activity-4.json"
     }
   ],
   "actions": [

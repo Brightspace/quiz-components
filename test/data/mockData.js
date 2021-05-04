@@ -2,8 +2,7 @@ import { addToMock } from './fetchMock';
 
 const rels = Object.freeze({
 	activityUsage: 'https://activities.api.brightspace.com/rels/activity-usage',
-	assignment: 'https://api.brightspace.com/rels/assignment',
-	userActivityUsage: 'https://activities.api.brightspace.com/rels/user-activity-usage'
+	linkPlacement: 'https://lti.api.brightspace.com/rels/link-placement'
 });
 
 export function mockActivityCollection(activityQuestionUsages, createComponent) {
@@ -82,7 +81,7 @@ export function mockActivityQuestionUsage(id, points, activityUsageHref, activit
 	};
 }
 
-export function mockActivityUsage(userActivityUsageHref) {
+export function mockActivityUsage(linkPlacementHref) {
 	return {
 		class: [
 			'activity-usage'
@@ -90,22 +89,9 @@ export function mockActivityUsage(userActivityUsageHref) {
 		links: [
 			{
 				rel: [
-					rels.userActivityUsage
+					rels.linkPlacement
 				],
-				href: userActivityUsageHref
-			}
-		]
-	};
-}
-
-export function mockUserActivityUsage(assignmentHref) {
-	return {
-		links: [
-			{
-				rel: [
-					rels.assignment
-				],
-				href: assignmentHref
+				href: linkPlacementHref
 			}
 		]
 	};

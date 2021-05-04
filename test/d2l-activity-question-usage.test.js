@@ -1,7 +1,7 @@
 import '../src/components/d2l-activity-question-usage';
 import { addToMock, mockLink } from './data/fetchMock';
 import { expect, html } from '@open-wc/testing';
-import { mockActivityQuestionUsage, mockActivityUsage, mockUserActivityUsage } from './data/mockData';
+import { mockActivityQuestionUsage, mockActivityUsage } from './data/mockData';
 import { clearStore } from '@brightspace-hmc/foundation-engine/state/HypermediaState.js';
 import { createComponentAndWait } from '@brightspace-hmc/foundation-components/test/test-util';
 import { runConstructor } from '@brightspace-ui/core/tools/constructor-test-helper.js';
@@ -15,8 +15,7 @@ describe('d2l-activity-question-usage', () => {
 	const points = 20;
 	const activityQuestionUsageHref = '/activity-question-usage';
 	const activityUsageHref = '/activity-usage';
-	const userActivityUsageHref = '/user-activity-usage';
-	const assignmentHref = '/assignment';
+	const linkPlacementHref = '/link-placement';
 
 	before(() => {
 		clearStore();
@@ -34,18 +33,12 @@ describe('d2l-activity-question-usage', () => {
 
 		addToMock(
 			activityUsageHref,
-			mockActivityUsage(userActivityUsageHref),
+			mockActivityUsage(linkPlacementHref),
 			_createComponent
 		);
 
 		addToMock(
-			userActivityUsageHref,
-			mockUserActivityUsage(assignmentHref),
-			_createComponent
-		);
-
-		addToMock(
-			assignmentHref,
+			linkPlacementHref,
 			{},
 			_createComponent
 		);
@@ -83,7 +76,7 @@ describe('d2l-activity-question-usage', () => {
 			const name = el.shadowRoot.querySelector('d2l-hc-name');
 			const input = el.shadowRoot.querySelector(`#points_input_${id}`);
 
-			expect(name.href).to.equal(assignmentHref);
+			expect(name.href).to.equal(linkPlacementHref);
 			expect(input.value).to.equal(points);
 		});
 
