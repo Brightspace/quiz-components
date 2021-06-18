@@ -3,7 +3,7 @@ import '@brightspace-ui/core/components/list/list-item-content.js';
 import '@brightspace-ui/core/components/inputs/input-number.js';
 import '@brightspace-ui/core/components/colors/colors.js';
 import '@brightspace-hmc/foundation-components/components/activity/name/d2l-activity-name';
-import '@brightspace-hmc/foundation-components/components/activity/type/d2l-activity-type';
+import '@brightspace-hmc/foundation-components/components/common/d2l-hc-description';
 import { css, LitElement } from 'lit-element/lit-element.js';
 import { HypermediaStateMixin, observableTypes } from '@brightspace-hmc/foundation-engine/framework/lit/HypermediaStateMixin';
 import { BaseMixin } from '../mixins/base-mixin';
@@ -94,7 +94,7 @@ class ActivityQuestionUsage extends HypermediaStateMixin(BaseMixin(LitElement)) 
 					<d2l-hc-name href="${this._activityHref}" .token="${this.token}"></d2l-hc-name>
 				</div>
 				<div slot="secondary">
-					<d2l-activity-type href="${this._activityUsageHref}" .token="${this.token}"></d2l-activity-type>
+					<d2l-hc-description href="${this._activityHref}" .token="${this.token}"></d2l-hc-description>
 				</div>
 			</d2l-list-item-content>
 			<div class="activity_list__points_input" slot="actions">
