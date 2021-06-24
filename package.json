@@ -5,7 +5,7 @@
   "main": "index.js",
   "dependencies": {
     "@brightspace-hmc/foundation-components": "BrightspaceHypermediaComponents/foundation-components.git#semver:^0",
-    "@brightspace-ui/core": "^1.118.2",
+    "@brightspace-ui/core": "^1.145.0",
     "lit-element": "^2.4.0"
   },
   "files": [
