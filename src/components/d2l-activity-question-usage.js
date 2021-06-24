@@ -94,7 +94,7 @@ class ActivityQuestionUsage extends HypermediaStateMixin(BaseMixin(LitElement)) 
 					<d2l-hc-name href="${this._activityHref}" .token="${this.token}"></d2l-hc-name>
 				</div>
 				<div slot="secondary">
-					<d2l-hc-description href="${this._activityHref}" .token="${this.token}"></d2l-hc-description>
+					${this.localize('externalActivity')} - <d2l-hc-description href="${this._activityHref}" .token="${this.token}"></d2l-hc-description>
 				</div>
 			</d2l-list-item-content>
 			<div class="activity_list__points_input" slot="actions">
