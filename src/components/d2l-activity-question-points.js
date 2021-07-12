@@ -76,7 +76,6 @@ class ActivityQuestionPoints extends HypermediaStateMixin(BaseMixin(LitElement))
 	}
 
 	_validation() {
-		console.log(this._questions);
 		this.updateDisabled = this._questions.reduce((result, question) => {
 			const activityQuestionUsage = this.shadowRoot.querySelector(`#activity_question_usage_${question.properties.id}`);
 			return result || !activityQuestionUsage || !activityQuestionUsage.isValid();
