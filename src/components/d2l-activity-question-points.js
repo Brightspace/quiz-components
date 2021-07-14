@@ -146,7 +146,7 @@ class ActivityQuestionPoints extends HypermediaStateMixin(BaseMixin(LitElement))
 					<d2l-button
 						class="d2l-activity-question-points-button_group__button"
 						@click=${this._notifyParent}>
-						${this.localize('buttonCancel')}
+						${this.localize('buttonSkip')}
 					</d2l-button>
 				</div>
 			</div>
