@@ -1,5 +1,4 @@
 export const val = {
-	'buttonCancel': 'Canslo',
 	'buttonUpdate': 'Diweddaru',
 	'externalActivity': 'Gweithgaredd Allanol',
 	'inputLabelPoints': 'Pwyntiau',

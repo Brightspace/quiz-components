@@ -1,5 +1,4 @@
 export const val = {
-	'buttonCancel': '취소',
 	'buttonUpdate': '업데이트',
 	'externalActivity': '외부 활동',
 	'inputLabelPoints': '점수',

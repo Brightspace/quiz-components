@@ -1,5 +1,4 @@
 export const val = {
-	'buttonCancel': 'Abbrechen',
 	'buttonUpdate': 'Aktualisieren',
 	'externalActivity': 'Externe Aktivität',
 	'inputLabelPoints': 'Punkte',
